@@ -115,7 +115,6 @@ export const generateFormValidity = function (
   inputsArray.map((input) => {
     const initialValidity =
       input.isRequired === undefined ? false : !input.isRequired;
-    console.log(initialValidity);
     const field = input.field;
     formValidity[field] = initialValidity;
   });

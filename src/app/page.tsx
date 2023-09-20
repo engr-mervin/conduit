@@ -1,9 +1,9 @@
 "use client";
 
 import { supabase } from "@/client";
+import SigninForm from "@/components/forms/SigninForm";
 import SignUpForm from "@/components/forms/SignupForm";
 import { User } from "@supabase/supabase-js";
-import { SupabaseAuthClient } from "@supabase/supabase-js/dist/module/lib/SupabaseAuthClient";
 import { useEffect, useState } from "react";
 
 enum Mode {
@@ -16,10 +16,10 @@ const Home = function () {
   const [mode, setMode] = useState<Mode>(Mode.Signup);
 
   const checkUser = async function () {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    setUser(user);
+    const getUserResponse = await fetch("/api/users");
+    const userData = await getUserResponse.json();
+    console.log(userData);
+    setUser(userData.data.user);
   };
 
   useEffect(() => {
@@ -37,10 +37,16 @@ const Home = function () {
 
   return (
     <div className="App">
-      {mode === Mode.Signup ? <SignUpForm /> : <p>Sign in</p>}
+      {mode === Mode.Signup ? <SignUpForm /> : <SigninForm />}
+      <button
+        onClick={(e) => {
+          setMode((prev) => (prev === Mode.Signin ? Mode.Signup : Mode.Signin));
+        }}
+      >
+        Switch
+      </button>
     </div>
   );
 };
 
 export default Home;
-SupabaseAuthClient;

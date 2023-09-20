@@ -9,7 +9,6 @@ import {
 import Form, { generateFormData, generateFormValidity } from "@/hooks/Form";
 
 import { InputPropsDeclared } from "@/types/input-props";
-import { supabase } from "@/client";
 
 const SignUpForm = function () {
   const inputsData: InputPropsDeclared[] = [
@@ -67,21 +66,18 @@ const SignUpForm = function () {
       return;
     }
 
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-      options: {
-        data: {
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          preferred_name: formData.preferredName,
-          user_name: formData.userName,
-          full_name: "Mervin Bocatcat the third",
-        },
-      },
+    let formDataForRequest = new FormData();
+    for (const key in formData) {
+      formDataForRequest.append(key, formData[key]);
+    }
+
+    const signUpResponse = await fetch("/api/users", {
+      method: "POST",
+      body: formDataForRequest,
     });
 
-    console.log(data, error);
+    const signUpData = await signUpResponse.json();
+    console.log(signUpData);
   };
 
   return (
