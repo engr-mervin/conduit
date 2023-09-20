@@ -1,0 +1,13 @@
+export const VALIDATION_NAME_MAX_LENGTH = 30;
+export const VALIDATION_NAME_MIN_LENGTH = 3;
+export const VALIDATION_NAME_REGEX_PATTERN = /^[A-Za-z ]+$/;
+export const VALIDATION_USER_NAME_MAX_LENGTH = 16;
+export const VALIDATION_USER_NAME_MIN_LENGTH = 4;
+export const VALIDATION_USER_NAME_REGEX_PATTERN = /^[A-Za-z0-9\.\-\_]+$/;
+export const VALIDATION_PASSWORD_MAX_LENGTH = 16;
+export const VALIDATION_PASSWORD_MIN_LENGTH = 8;
+export const VALIDATION_PASSWORD_REGEX_PATTERN = /^[A-Za-z0-9\.\-\_]+$/;
+export const VALIDATION_EMAIL_MAX_LENGTH = 50;
+export const VALIDATION_EMAIL_MIN_LENGTH = 5;
+export const VALIDATION_EMAIL_REGEX_PATTERN =
+  /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
